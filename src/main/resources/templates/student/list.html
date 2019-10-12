@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="author" content="Ben Farren">
+    <link href="/src/main/resources/static/css/bootstrap.css" type="stylesheet">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}">
+    <title>eRegistrar - Student List</title>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-dark bg-primary">
+        <a style="font-size: 20px; padding-right: 3em;" class="navbar-brand" href="/eregistrar/home">eRegistrar - Student Registration System</a>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item" style="margin: 15px; border-left: white 3px solid; padding-left: 3em; padding-right: 2em; text-align: center">
+                    <a class="nav-link" href="/eregistrar/student/list">Manage students</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+	<div style="padding-top:1em;" class="container">
+        <div>          
+            <span style="float:right;">
+                <a class="btn btn-outline-success btn-md" href="/eregistrar/student/new">Add New student</a>
+            </span>
+        </div>
+
+        <p>&nbsp;</p>
+        <div style="font-size: 1em">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Student Number</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Middle</th>
+                    <th scope="col">CGPA</th>
+                    <th scope="col">Enrollment Date</th>
+                    <th scope="col">International</th>
+                    <th scope="col">&nbsp;</th>
+                    <th scope="col">&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="student,iterStat : ${students}"> 
+                    <th scope="row" th:text="${iterStat.count}"></th>
+                    <td th:text="${student.studentNumber}"></td>
+                    <td th:text="${student.lastName}"></td>
+                    <td th:text="${student.firstName}"></td>
+                    <td th:text="${student.middleName}"></td>
+                    <td th:text="${student.cgpa}"></td>
+                    <td th:text="${student.enrollmentDate}"></td>
+                    <td th:text="${student.isInternational}"></td>
+                    <td><a th:href="@{'/eregistrar/student/edit/{studentId}'(studentId=${student.studentId})}">Edit</a></td>
+                    <td>
+                        <a th:href="@{'/eregistrar/student/delete/' + ${student.studentId}}">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+    	</div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+</body>
+</html>
